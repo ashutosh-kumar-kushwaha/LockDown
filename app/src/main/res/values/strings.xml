@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LockDown</string>
+    <string name="accessibility_service_description">App Lock Service Description</string>
 </resources>
