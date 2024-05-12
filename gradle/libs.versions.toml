@@ -1,16 +1,20 @@
 [versions]
 agp = "8.4.0"
-kotlin = "1.9.0"
+hilt = "2.51.1"
+kotlin = "1.9.24"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.9.0"
-composeBom = "2023.08.00"
+composeBom = "2024.05.00"
+ksp = "1.9.24-1.0.20"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = {  group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -28,4 +32,5 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
