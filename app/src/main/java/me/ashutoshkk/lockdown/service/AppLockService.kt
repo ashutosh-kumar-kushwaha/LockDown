@@ -38,60 +38,6 @@ class AppLockService : Service() {
                     Log.d("Ashu", it)
                 }
         }
-//        startForegroundAppCheck()
         return START_STICKY
     }
-
-    private fun startForegroundAppCheck() {
-        CoroutineScope(Dispatchers.IO).launch {
-            while (true) {
-                withContext(Dispatchers.Main) {
-                    Log.d("Ashu", getForegroundApp().toString())
-                }
-                delay(1000)
-            }
-        }
-    }
-
-    private fun getForegroundApp2(): String? {
-        val time = System.currentTimeMillis()
-        val appList: List<UsageStats> =
-            usageStatsManager.queryUsageStats(
-                UsageStatsManager.INTERVAL_DAILY,
-                time - 1000 * 1000,
-                time
-            )
-        if (appList.isNotEmpty()) {
-            val mySortedMap: SortedMap<Long, UsageStats> = TreeMap()
-            for (usageStats in appList) {
-                mySortedMap[usageStats.lastTimeUsed] = usageStats
-            }
-            if (!mySortedMap.isEmpty()) {
-                return mySortedMap[mySortedMap.lastKey()]!!.packageName
-            }
-        }
-        return null
-    }
-
-    private fun getForegroundApp(): String? {
-        val usageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-        val currentTime = System.currentTimeMillis()
-        val events = usageStatsManager.queryEvents(currentTime - 10000, currentTime)
-        val event = UsageEvents.Event()
-        var packageName: String? = null
-
-        while (events.hasNextEvent()) {
-            events.getNextEvent(event)
-            if (event.eventType == UsageEvents.Event.ACTIVITY_RESUMED) {
-                packageName = event.packageName
-            }
-        }
-        return packageName
-    }
-
-    override fun onTaskRemoved(rootIntent: Intent?) {
-        super.onTaskRemoved(rootIntent)
-
-    }
-
 }
