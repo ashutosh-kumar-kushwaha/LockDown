@@ -3,14 +3,16 @@ package me.ashutoshkk.lockdown.service
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class ForegroundAppObserver(private val context: Context) {
+class ForegroundAppObserver @Inject constructor(@ApplicationContext private val context: Context) {
 
     fun flow(): Flow<String> = flow {
         while (true) {

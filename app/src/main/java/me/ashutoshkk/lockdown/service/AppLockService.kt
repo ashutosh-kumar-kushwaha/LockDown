@@ -9,6 +9,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -17,11 +18,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.SortedMap
 import java.util.TreeMap
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class AppLockService : Service() {
 
-    private lateinit var usageStatsManager: UsageStatsManager
+    @Inject
+    lateinit var foregroundAppObserver: ForegroundAppObserver
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -29,8 +33,6 @@ class AppLockService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Toast.makeText(applicationContext, "Started", Toast.LENGTH_SHORT).show()
-        usageStatsManager = getSystemService(USAGE_STATS_SERVICE) as UsageStatsManager
-        val foregroundAppObserver = ForegroundAppObserver(applicationContext)
         CoroutineScope(Dispatchers.Default).launch {
             foregroundAppObserver
                 .flow()
