@@ -1,10 +1,6 @@
 package me.ashutoshkk.lockdown.service
 
 import android.app.Service
-import android.app.usage.UsageEvents
-import android.app.usage.UsageStats
-import android.app.usage.UsageStatsManager
-import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
@@ -12,14 +8,9 @@ import android.widget.Toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.SortedMap
-import java.util.TreeMap
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class AppLockService : Service() {
