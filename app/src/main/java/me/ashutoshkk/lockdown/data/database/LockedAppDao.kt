@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LockedAppDao {
@@ -16,7 +17,7 @@ interface LockedAppDao {
     fun unlockApp(app: LockedApp)
 
     @Query("SELECT * FROM locked_app")
-    fun getLockedApps(): List<LockedApp>
+    fun getLockedApps(): Flow<List<LockedApp>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun lockApps(apps: List<LockedApp>)

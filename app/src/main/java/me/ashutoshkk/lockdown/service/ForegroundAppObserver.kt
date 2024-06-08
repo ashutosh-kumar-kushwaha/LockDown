@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class ForegroundAppObserver @Inject constructor(@ApplicationContext private val context: Context) {
 
-    fun flow(): Flow<String> = flow {
+    fun asFlow(): Flow<String> = flow {
         while (true) {
             getForegroundApp()?.let {
                 emit(it)
