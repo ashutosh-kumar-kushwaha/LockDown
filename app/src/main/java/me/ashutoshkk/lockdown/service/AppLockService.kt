@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import me.ashutoshkk.lockdown.data.database.LockedAppDao
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -17,6 +18,9 @@ class AppLockService : Service() {
 
     @Inject
     lateinit var foregroundAppObserver: ForegroundAppObserver
+
+    @Inject
+    lateinit var lockedAppDao: LockedAppDao
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
